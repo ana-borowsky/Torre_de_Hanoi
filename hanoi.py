@@ -62,25 +62,41 @@ S(10) =
 3 = [3, 0]
 '''
 
-pino_1 = [6, 5, 4, 3, 2, 1, 0, None]
-pino_2 = [None]
-pino_3 = [None]
+n = int(input("Quantos discos você quer? \n>"))
+
+pino_inicial = []
+pino_1 = []
+pino_2 = []
+pino_3 = []
+
+#Popula o pino 1
+for i in range(n):
+	pino_inicial.append(i)
+
+pino_1 = pino_inicial.copy()
 
 # Disco só pode ser colocado em um pino cujo último disco tenha um diâmetro maior do que o dele.
 # Mover sempre pra direita
 # Não pode mover o mesmo disco duas vezes seguidas
 
 
+#Utilidades
+def move_disk(p1, p2):
+	p2.append(p1.pop())
 
-pino_inicial = [6, 5, 4, 3, 2, 1, 0] # Pegar por input do usuário o tamanho do array ou escolher default
-pino_2[0] = pino_1.pop() # S(1)
-pino_3[0] = pino_1.pop() # S(2)
+#recursão
+def hanoi():
+	
 
-while pino_3 != pino_inicial:
+	if pino_3 != pino_inicial:
+		hanoi()
+	else:
+		print("Yay")
 
 
+hanoi()
 
-print(pino_1)
-print(pino_2)
-print(pino_3)
+# print(pino_1)
+# print(pino_2)
+# print(pino_3)
 
