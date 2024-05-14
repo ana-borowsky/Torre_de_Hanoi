@@ -77,7 +77,7 @@ pinos[0] = pino_inicial.copy()
 # Disco só pode ser colocado em um pino cujo último disco tenha um diâmetro maior do que o dele.
 # Mover sempre pra direita
 # Não pode mover o mesmo disco duas vezes seguidas
-
+# Pino que só tem um não pode mover para vazio
 #Utilidades
 def move_disk(pino_origem, pino_target):
     print(pinos[0])
@@ -94,9 +94,8 @@ def move_disk(pino_origem, pino_target):
 # 				if pino != i:
 # 					pinos[i] == [] or pinos[pino][-1] < pinos[i][-1]
 # 			return (i, pino)
-
 #recursão
-def hanoi(last_target):
+def hanoi(last_target, count):
     #print(len(pinos))
     #print(pinos[0])
     origin = -1
@@ -107,22 +106,21 @@ def hanoi(last_target):
             for pino_alvo in range(len(pinos)):
                 #print("pino: " + str(pino_alvo))
                 if pinos[pino_alvo] != i:
-                    if pinos[pino_alvo] == [] or pinos[pino_alvo][-1] > pinos[i][-1]:
+                    if (pinos[pino_alvo] == [] or pinos[pino_alvo][-1] > pinos[i][-1]) and len(pinos[i]) != 1 or pinos[pino_alvo] != []:
                         origin = i
                         target = pino_alvo
                         #print("ACERTOU:", origin, target)
                         break
+
+    print(count)
     move_disk(pinos[origin], pinos[target])
 
     if pinos[2] != pino_inicial:
-        hanoi(target)
+        hanoi(target, count + 1)
 	# if p3 != pino_inicial:
 	# 	hanoi()
 	# else:
 	# 	print("Yay")
 
-hanoi(-1)
-print("1:" + pinos[0])
-print("2:" + pinos[1])
-print("3:" + pinos[2])
+hanoi(-1, 0)
 
