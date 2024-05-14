@@ -80,11 +80,15 @@ pinos[0] = pino_inicial.copy()
 # Pino que só tem um não pode mover para vazio
 #Utilidades
 def move_disk(pino_origem, pino_target):
+    pino_target.append(pino_origem.pop())
+
+
+def print_hanoi(count):
+    print(count + 1)
     print(pinos[0])
     print(pinos[1])
     print(pinos[2])
     print("\n\n")
-    pino_target.append(pino_origem.pop())
 
 #Escolher pino
 # def choose_disk():
@@ -106,21 +110,24 @@ def hanoi(last_target, count):
             for pino_alvo in range(len(pinos)):
                 #print("pino: " + str(pino_alvo))
                 if pinos[pino_alvo] != i:
-                    if (pinos[pino_alvo] == [] or pinos[pino_alvo][-1] > pinos[i][-1]) and len(pinos[i]) != 1 or pinos[pino_alvo] != []:
+                    if (pinos[pino_alvo] == [] or pinos[pino_alvo][-1] > pinos[i][-1]):
                         origin = i
                         target = pino_alvo
                         #print("ACERTOU:", origin, target)
-                        break
+                        if n % 2.0 == 0 and count == 0:
+                            break
 
-    print(count)
     move_disk(pinos[origin], pinos[target])
 
     if pinos[2] != pino_inicial:
+        print_hanoi(count)
         hanoi(target, count + 1)
+    else:
+        print("MÃE EU TO FAMOSO!\n")
+        print_hanoi(count)
 	# if p3 != pino_inicial:
 	# 	hanoi()
 	# else:
 	# 	print("Yay")
 
 hanoi(-1, 0)
-
