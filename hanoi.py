@@ -70,7 +70,7 @@ pino_inicial = []
 pinos = [[], [], []]
 #Popula o pino 1
 for i in range(n):
-	pino_inicial.append(i)
+	pino_inicial.insert(0, i)
 
 pinos[0] = pino_inicial.copy()
 
@@ -107,7 +107,7 @@ def hanoi(last_target):
             for pino_alvo in range(len(pinos)):
                 #print("pino: " + str(pino_alvo))
                 if pinos[pino_alvo] != i:
-                    if pinos[pino_alvo] == [] or pinos[pino_alvo][-1] < pinos[i][-1]:
+                    if pinos[pino_alvo] == [] or pinos[pino_alvo][-1] > pinos[i][-1]:
                         origin = i
                         target = pino_alvo
                         #print("ACERTOU:", origin, target)
