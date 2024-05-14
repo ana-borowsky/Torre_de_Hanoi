@@ -68,6 +68,7 @@ pino_inicial = []
 pino_1 = []
 pino_2 = []
 pino_3 = []
+last_moved = -1
 
 #Popula o pino 1
 for i in range(n):
@@ -84,9 +85,16 @@ pino_1 = pino_inicial.copy()
 def move_disk(p1, p2):
 	p2.append(p1.pop())
 
+
+#Escolher pino
+def choose_disk():
+	for i in range(3):
+		return -1 #NÃO FUNCIONA CORRA PARA AS COLINAS	
+
 #recursão
 def hanoi():
-	
+	origin = choose_disk()
+		
 
 	if pino_3 != pino_inicial:
 		hanoi()
