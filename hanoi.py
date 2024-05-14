@@ -66,17 +66,13 @@ n = int(input("Quantos discos você quer? \n>"))
 
 pino_inicial = []
 
-last_target = -1
+#last_target = -1
 pinos = [[], [], []]
-p1 = pinos[0]
-p2 = pinos[1]
-p3 = pinos[2]
-
 #Popula o pino 1
 for i in range(n):
 	pino_inicial.append(i)
 
-p1 = pino_inicial.copy()
+pinos[0] = pino_inicial.copy()
 
 # Disco só pode ser colocado em um pino cujo último disco tenha um diâmetro maior do que o dele.
 # Mover sempre pra direita
@@ -84,7 +80,11 @@ p1 = pino_inicial.copy()
 
 #Utilidades
 def move_disk(pino_origem, pino_target):
-	pino_target.append(pino_origem.pop())
+    print(pinos[0])
+    print(pinos[1])
+    print(pinos[2])
+    print("\n\n")
+    pino_target.append(pino_origem.pop())
 
 #Escolher pino
 # def choose_disk():
@@ -96,23 +96,33 @@ def move_disk(pino_origem, pino_target):
 # 			return (i, pino)
 
 #recursão
-def hanoi():
-	origin = -1
-	target = -1
-	for i in range(3):
-		if i != last_target and len(pinos[i]) > 0:
- 			for pino in pinos:
- 				if pino != i:
- 					if pinos[i] == [] or pinos[pino][-1] < pinos[i][-1]:
-                        print(origin, target)
-		
+def hanoi(last_target):
+    #print(len(pinos))
+    #print(pinos[0])
+    origin = -1
+    target = -1
+    for i in range(3):
+        #print("i: " + str(i))
+        if i != last_target and len(pinos[i]) > 0:
+            for pino_alvo in range(len(pinos)):
+                #print("pino: " + str(pino_alvo))
+                if pinos[pino_alvo] != i:
+                    if pinos[pino_alvo] == [] or pinos[pino_alvo][-1] < pinos[i][-1]:
+                        origin = i
+                        target = pino_alvo
+                        #print("ACERTOU:", origin, target)
+                        break
+    move_disk(pinos[origin], pinos[target])
+
+    if pinos[2] != pino_inicial:
+        hanoi(target)
 	# if p3 != pino_inicial:
 	# 	hanoi()
 	# else:
 	# 	print("Yay")
 
-hanoi()
-# print(p1)
-# print(p2)
-# print(p3)
+hanoi(-1)
+print("1:" + pinos[0])
+print("2:" + pinos[1])
+print("3:" + pinos[2])
 
